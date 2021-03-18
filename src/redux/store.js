@@ -1,7 +1,7 @@
 // import { createStore } from 'redux';
 // import { composeWithDewTools } from 'redux-devtools-extension';
 import { configureStore } from '@reduxjs/toolkit';
-import rootReducer from './phoneBook/rootReducer';
+import rootReducer from './rootReducer';
 
 const store = configureStore({
   reducer: rootReducer,
