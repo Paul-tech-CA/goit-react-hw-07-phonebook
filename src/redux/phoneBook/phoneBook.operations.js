@@ -24,23 +24,24 @@ const fetchNumbers = () => async dispatch => {
 };
 
 const deleteNumber = id => async dispatch => {
-    dispatch(removeNumberRequested());
-    try {
-        await axios.delete(`/numbers/${id}`);
-        dispatch(removeNumberSuccess(id));
-    } catch (error) {
-        dispatch(removeNumberFailure(error));
-    }
+  dispatch(removeNumberRequested());
+  try {
+    await axios.delete(`/numbers/${id}`);
+    dispatch(removeNumberSuccess(id));
+  } catch (error) {
+    dispatch(removeNumberFailure(error));
+  }
 };
 
 const addNumber = contact => async dispatch => {
-    dispatch(addNumberRequested());
-    try {
-       const {data} = await axios.post(`/contacts`, {contact});
-       dispatch(addNumberSuccess(data)); 
-    } catch (error) {
-        dispatch(addNumberFailure(error));
-    }
+  dispatch(addNumberRequested());
+  try {
+    const { data } = await axios.post(`/numbers`, contact);
+    console.log(data);
+    dispatch(addNumberSuccess(data));
+  } catch (error) {
+    dispatch(addNumberFailure(error));
+  }
 };
 
-export {fetchNumbers, deleteNumber, addNumber};
+export { fetchNumbers, deleteNumber, addNumber };

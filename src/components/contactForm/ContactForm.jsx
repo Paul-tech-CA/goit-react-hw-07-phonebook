@@ -1,32 +1,33 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import style from '../App.module.css';
+import { connect } from 'react-redux';
+import { addNumber } from '../../redux/phoneBook/phoneBook.operations';
 
 const initialState = {
-  name: "",
-  number: "",
+  name: '',
+  number: '',
 };
 
 class ContactForm extends Component {
   state = { ...initialState };
 
-  onHandleChange = (event) => {
+  onHandleChange = event => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };
 
-  onHandleSubmit = (event) => {
+  onHandleSubmit = event => {
     event.preventDefault();
-    this.props.addContact(this.state);
+    this.props.addNumber(this.state);
     this.setState({ ...initialState });
   };
-  
 
   render() {
     const { name, number } = this.state;
     return (
       <form className={style.contactForm} onSubmit={this.onHandleSubmit}>
-        <p className={style.inputName}> Name</p> 
-        <label className={style.label}>        
+        <p className={style.inputName}> Name</p>
+        <label className={style.label}>
           <input
             type="text"
             name="name"
@@ -34,10 +35,9 @@ class ContactForm extends Component {
             value={name}
             onChange={this.onHandleChange}
           />
-        </label >
+        </label>
         <p className={style.inputName}> Number</p>
         <label className={style.label}>
-          
           <input
             type="number"
             name="number"
@@ -46,10 +46,14 @@ class ContactForm extends Component {
             onChange={this.onHandleChange}
           />
         </label>
-        <button className={style.buttonAdd}  type="submit">Add contact</button>
+        <button className={style.buttonAdd} type="submit">
+          Add contact
+        </button>
       </form>
     );
   }
 }
 
-export default ContactForm;
+const mapDispatchToProps = { addNumber };
+
+export default connect(null, mapDispatchToProps)(ContactForm);
